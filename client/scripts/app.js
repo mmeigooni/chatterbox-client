@@ -20,6 +20,22 @@ var App = {
   fetch: function(callback = ()=>{}) {
     Parse.readAll((data) => {
       // examine the response from the server request:
+      var messages = data.results;
+      for (var i = 0; i < messages.length; i++) {
+        console.log(`username should be: ${username}`);
+
+        var message = DOMPurify.sanitize(messages[i].text).trim();
+        if (message.length === 0) {
+          message = '[no message text]';
+        }
+
+        var username = DOMPurify.sanitize(messages[i].username).trim();
+        if (username.length === 0) {
+          username = '[no username]';
+        }
+        MessagesView.render(username, message);
+      }
+      //MesaagesView.render
       console.log(data);
 
       callback();
@@ -34,5 +50,17 @@ var App = {
   stopSpinner: function() {
     App.$spinner.fadeOut('fast');
     FormView.setStatus(false);
+  },
+  sanitize: function(string) {
+    const map = {
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#x27;',
+      "/": '&#x2F;',
+    };
+    const reg = /[&<>"'/]/ig;
+    return string.replace(reg, (match)=>(map[match]));
   }
 };
