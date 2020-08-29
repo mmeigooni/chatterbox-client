@@ -13,7 +13,6 @@ var FormView = {
     var dirtyMessage = {username: window.location.search.substr(10), text: $('#message')[0].value, roomname: 'placeholder'};
     // Stop the browser from submitting the form
     var cleanMessage = sanitizeMessage(dirtyMessage);
-    debugger;
     MessagesView.render(cleanMessage);
 
 
@@ -25,7 +24,7 @@ var FormView = {
     // want to work with messagesview.render
     // send it to the models
     // debugger;
-    // Parse.create(cleanMessage);
+    Parse.create(cleanMessage);
     console.log('click!');
   },
 

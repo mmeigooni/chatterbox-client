@@ -21,7 +21,6 @@ var App = {
     Parse.readAll((data) => {
       // examine the response from the server request:
       var messages = data.results.reverse();
-      console.log(data.results);
       for (var i = 0; i < messages.length; i++) {
         MessagesView.render(sanitizeMessage(messages[i]));
       }
