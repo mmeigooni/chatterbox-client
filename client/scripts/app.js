@@ -20,23 +20,13 @@ var App = {
   fetch: function(callback = ()=>{}) {
     Parse.readAll((data) => {
       // examine the response from the server request:
-      var messages = data.results;
+      var messages = data.results.reverse();
+      console.log(data.results);
       for (var i = 0; i < messages.length; i++) {
-        console.log(`username should be: ${username}`);
-
-        var message = DOMPurify.sanitize(messages[i].text).trim();
-        if (message.length === 0) {
-          message = '[no message text]';
-        }
-
-        var username = DOMPurify.sanitize(messages[i].username).trim();
-        if (username.length === 0) {
-          username = '[no username]';
-        }
-        MessagesView.render(username, message);
+        MessagesView.render(sanitizeMessage(messages[i]));
       }
       //MesaagesView.render
-      console.log(data);
+      console.log(messages);
 
       callback();
     });
