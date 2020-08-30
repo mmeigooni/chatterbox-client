@@ -14,6 +14,7 @@ var RoomsView = {
   },
 
   render: function() {
+
     MessagesView.render(message, roomname);
   }
 

@@ -22,9 +22,13 @@ var App = {
       // examine the response from the server request:
       var messages = data.results.reverse();
       Rooms.updateRooms(messages);
-      for (var i = 0; i < messages.length; i++) {
-        MessagesView.render(sanitizeMessage(messages[i]));
-      }
+      $(document).on('change', 'select', function(element) {
+        for (var i = 0; i < messages.length; i++) {
+          MessagesView.render(sanitizeMessage(messages[i]), this.options[element.target.selectedIndex].text);
+        }
+        MessagesView.render();
+        // console.log(this.options[element.target.selectedIndex].text);
+      });
       //MesaagesView.render
       // console.log(messages);
 
@@ -42,3 +46,5 @@ var App = {
     FormView.setStatus(false);
   },
 };
+
+
