@@ -8,18 +8,12 @@ var FormView = {
 
   handleSubmit: function(event) {
     event.preventDefault();
-    console.log($('#message')[0].value);
-    console.log(window.location.search.substr(10));
     var dirtyMessage = {username: window.location.search.substr(10), text: $('#message')[0].value, roomname: 'placeholder'};
     // Stop the browser from submitting the form
     var cleanMessage = sanitizeMessage(dirtyMessage);
     MessagesView.render(cleanMessage);
 
 
-
-    // two purposes:
-      // 1 -- use our exisitng rendering capabilities to immediately render the submitted message into #chats
-      // 2 -- POST our message to the server
     // need a way to take the info from the form that would have formview's info
     // want to work with messagesview.render
     // send it to the models

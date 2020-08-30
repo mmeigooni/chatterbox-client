@@ -5,9 +5,11 @@ var MessagesView = {
   initialize: function() {
   },
 
-  render: function(message) {
-    // var renderedMessage = MessageView.render({username: username, message: message});
-    // filtering rooms should live her
+  render: function(message, roomname) {
+
+    // if there is a roomname
+    // only render messages with that roomname
+    // filtering rooms should live here
     var renderedMessage = this.renderMessage(message);
     this.$chats.prepend(renderedMessage);
   },

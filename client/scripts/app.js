@@ -8,7 +8,7 @@ var App = {
     App.username = window.location.search.substr(10);
 
     FormView.initialize();
-    RoomsView.initialize();
+    // RoomsView.initialize();
     MessagesView.initialize();
 
     // Fetch initial batch of messages
@@ -17,15 +17,16 @@ var App = {
 
   },
 
-  fetch: function(callback = ()=>{}) {
+  fetch: function(callback = ( )=> {}) {
     Parse.readAll((data) => {
       // examine the response from the server request:
       var messages = data.results.reverse();
+      Rooms.updateRooms(messages);
       for (var i = 0; i < messages.length; i++) {
         MessagesView.render(sanitizeMessage(messages[i]));
       }
       //MesaagesView.render
-      console.log(messages);
+      // console.log(messages);
 
       callback();
     });
